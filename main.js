@@ -29,31 +29,33 @@ const tileProperty = {
     color: "purple"
   }
 };
-/// 타일 랜덤가져오기
-function getRandomTile() {
-  const levels = Object.keys(tileProperty); // tileProperty의 레벨 목록을 배열로 바꿔줌.
-  const randomLevel = levels[Math.floor(Math.random() * levels.length)]; // levels[0] ~ [6] 랜덤뽑기
-  return tileProperty[randomLevel]; // 선택된 레벨의 정보 반환
-}
-const tileNumber = getRandomTile().number;
-const tileColor = getRandomTile().color;
+const myArrary = [
+  a1 = [4, "red"]
+]
 
 /// 기본타일 정의
-function unitTileInsector(totalNum) {  const newList = [];
+function unitTileInsector(totalNum) { 
+  const newList = [];
   let templet = "";
   for (let i = 1; i<=totalNum; i++) {
-    // imageUrl 뒤에 구분용 숫자(i) 넣어줘야 전부 다른이미지로 나옴 !!    
+    /// 타일 랜덤가져오기
+    // 함수 내부에서 객체이름으로 꺼내와야 레벨 매칭되게 랜덤됨.
+    const randomLevel = Math.floor(Math.random() * Object.keys(tileProperty).length) + 1; // tileProperty의 레벨 목록을 배열로 바꿔줌.
+    const selectedLevel = tileProperty[`level${randomLevel}`];
+    const tileNumber = selectedLevel.number;
+    const tileColor = selectedLevel.color;  
+
     newList.push(`
-    <div class="unit-tile__${getRandomTile().color}">${getRandomTile().number}</div>
+    <div class="unit-tile__${tileColor}">${tileNumber}</div>
   `)
   }
-  // <div class="unit-tile__${getRandomTile().color}">${getRandomTile().number}</div>
-  // <div class="unit-tile__${tileColor}">${tileNumber}</div>
 
   templet = newList.join('');
   document.getElementById('script--unit-tile').innerHTML = templet;
+  
 }
 unitTileInsector(100);
+
 
 
 

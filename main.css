@@ -22,6 +22,7 @@
   align-items: center;
   grid-template-columns: repeat(10, 55px);
 }
+.unit-tile,
 .unit-tile__red,
 .unit-tile__orange,
 .unit-tile__yellow,
@@ -38,6 +39,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  /* effect */
+  border-radius: 5px;
 }
 .unit-tile__red{
   /* color */
