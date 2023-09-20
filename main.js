@@ -29,14 +29,14 @@ const tileProperty = {
     color: "purple"
   }
 };
+/// 타일 랜덤가져오기
 function getRandomTile() {
   const levels = Object.keys(tileProperty); // tileProperty의 레벨 목록을 배열로 바꿔줌.
   const randomLevel = levels[Math.floor(Math.random() * levels.length)]; // levels[0] ~ [6] 랜덤뽑기
   return tileProperty[randomLevel]; // 선택된 레벨의 정보 반환
 }
-// 랜덤 타일 정보 가져오기
-// const randomTile = getRandomTile();
-console.log(getRandomTile()); // 랜덤으로 선택된 타일 정보 출력
+const tileNumber = getRandomTile().number;
+const tileColor = getRandomTile().color;
 
 /// 기본타일 정의
 function unitTileInsector(totalNum) {  const newList = [];
@@ -47,6 +47,8 @@ function unitTileInsector(totalNum) {  const newList = [];
     <div class="unit-tile__${getRandomTile().color}">${getRandomTile().number}</div>
   `)
   }
+  // <div class="unit-tile__${getRandomTile().color}">${getRandomTile().number}</div>
+  // <div class="unit-tile__${tileColor}">${tileNumber}</div>
 
   templet = newList.join('');
   document.getElementById('script--unit-tile').innerHTML = templet;
