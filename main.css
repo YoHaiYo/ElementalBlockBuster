@@ -1,77 +1,41 @@
-/* Common */
-.wrapper-center{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/* UI */
-.title{
-  font-size: 30px;
-  font-weight: 600;
-  padding-bottom: 20px;
-}
-.game-window{
-  width: 550px;
-  height: 550px;
-  border: 1px solid gray;
-}
-/* Game */
-#script--unit-tile{
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(10, 55px);
-}
-.unit-tile,
-.unit-tile__red,
-.unit-tile__orange,
-.unit-tile__yellow,
-.unit-tile__green,
-.unit-tile__blue,
-.unit-tile__darkblue,
-.unit-tile__purple{
-  /* box */
-  width: 50px;
-  height: 50px;
-  border: 1px solid gray;
-  margin: 1px;
-  /* display */
+.wrapper-center {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* effect */
+  margin-top: 2vh;
+}
+/* #cell {
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
   border-radius: 5px;
+  text-align: center;
+  background-color: rgb(202, 255, 127);
+  font-size: 23px;
+  font-weight: 600;
+} */
+
+td{
+  width: 60px;
+  height: 60px;
+  border: 1px solid black;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgb(202, 255, 127);
+  font-size: 23px;
+  font-weight: 600;
 }
-.unit-tile__red{
-  /* color */
-  background-color: red;
-  color: #fff;
-}
-.unit-tile__orange{
-  /* color */
-  background-color: orange;
-}
-.unit-tile__yellow{
-  /* color */
-  background-color: yellow;
-}
-.unit-tile__green{
-  /* color */
-  background-color: green;
-  color: #fff;
-}
-.unit-tile__blue{
-  /* color */
-  background-color: blue;
-  color: #fff;
-}
-.unit-tile__darkblue{
-  /* color */
-  background-color: darkblue;
-  color: #fff;
-}
-.unit-tile__purple{
-  /* color */
-  background-color: purple;
-  color: #fff;
+
+#attack{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  height: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: rgb(255, 138, 127);
+  font-size: 23px;
+  font-weight: 600;
+
 }
