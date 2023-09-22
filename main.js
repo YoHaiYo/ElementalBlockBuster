@@ -1,97 +1,101 @@
 // id가 "field"인 요소를 찾습니다.
 const fieldElement = document.getElementById("field");
-
-// id가 "attack"인 요소를 찾습니다.
-const attackElement = document.getElementById("attack");
-
 // 테이블 엘리먼트를 생성합니다.
 const tableElement = document.createElement("table");
-
-const filedSize = 4;
-
-// 셀을 클릭했을 때 실행할 함수 (1씩 증가)
-function cellClickHandler() {
-    // 현재 셀의 텍스트 콘텐츠를 가져옵니다.
-    let currentValue = parseInt(this.textContent);
-    // 텍스트를 1씩 증가시킵니다.
-    currentValue++;
-    // 새로운 값을 셀의 텍스트로 설정합니다.
-    this.textContent = currentValue;
-};
-
-// 셀을 클릭했을 때 실행할 함수 (1씩 감소)
-function decrementCellValue() {
-    // 현재 셀의 텍스트 콘텐츠를 가져옵니다.
-    let currentValue = parseInt(this.textContent);
-    // 텍스트를 1씩 감소시킵니다.
-    currentValue--;
-    // 최소값은 0으로 제한합니다.
-    // if (currentValue < 0) {
-    //     currentValue = 0;
-    // }
-    // 새로운 값을 셀의 텍스트로 설정합니다.
-    this.textContent = currentValue;
-};
-
-// "attack" 모드 여부를 추적하는 변수
-let attackMode = false;
-
-// "attack" 태그를 클릭했을 때 실행할 함수
-function toggleAttackMode() {
-    attackMode = !attackMode; // "attack" 모드를 전환합니다.
-    if (attackMode===true) {
-      attackElement.innerHTML="Attack O";
-    } else {
-      attackElement.innerHTML="Attack X";
-    }
-    // "attack" 모드가 변경되면 모든 셀의 클릭 이벤트 리스너를 갱신합니다.
-    updateCellEventListeners();
-};
-
-// 셀의 클릭 이벤트 리스너를 갱신하는 함수
-function updateCellEventListeners() {
-    // 모든 셀을 가져옵니다.
-    const cells = document.getElementsByTagName("td");
-    for (let i = 0; i < cells.length; i++) {
-      let cell = cells[i];
-        if (attackMode) {
-            cell.removeEventListener("click", cellClickHandler);
-            cell.addEventListener("click", decrementCellValue);
-        } else {
-            cell.removeEventListener("click", decrementCellValue);
-            cell.addEventListener("click", cellClickHandler);
-        }
-    }
-};
+const filedSize = 8;
 
 // 4x4 크기의 테이블을 만드는 함수
 function createTable() {
-    for (let i = 1; i <= filedSize; i++) {
-        // 새로운 행을 생성합니다.
-        let row = document.createElement("tr");
-        for (let j = 1; j <= filedSize; j++) {
-            // 각 셀에 좌표에 맞는 id를 부여합니다.
-            let cell = document.createElement("td");
-            cell.id = "x" + j + "y" + i;
-            // 셀에 내용을 추가할 수도 있습니다.
-            cell.textContent = "0";
+  for (let i = 1; i <= filedSize; i++) {
+    // 새로운 행을 생성합니다.
+    let row = document.createElement("tr");
+    for (let j = 1; j <= filedSize; j++) {
+      // 각 셀에 좌표에 맞는 id를 부여합니다.
+      let cell = document.createElement("td");
+      cell.id = "x" + j + "y" + i;
+      // 셀에 내용을 추가할 수도 있습니다.
+      // 방해물 블록 초기 HP
+      cell.textContent = "5";
 
-            // 셀을 클릭했을 때 이벤트 리스너를 추가합니다.
-            cell.addEventListener("click", cellClickHandler);
+      // 클릭 이벤트 핸들러 함수 내부에서 처리합니다.
+      cell.addEventListener("click", function () {
+        // 클릭한 td 태그의 id 값을 콘솔에 출력합니다.
+        console.log("선택된 셀의 좌표 :", cell.id);
 
-            // 행에 셀을 추가합니다.
-            row.appendChild(cell);
+        const adjacentCells = []; // 반복문 안에 있어야 클릭할 때마다 배열 초기화.
+        // 선택할 태그의 좌표
+        const damage = 1;
+        const damageRange = 1;
+        const xCoordinate = j;
+        const yCoordinate = i;
+        // 선택된 태그의 배열그룹 범위
+        const cellLeft = xCoordinate - damageRange;
+        const cellRight = xCoordinate + damageRange;
+        const cellTop = yCoordinate + damageRange;
+        const cellBottom = yCoordinate - damageRange;
+        // 좌우의 td 태그를 배열에 추가합니다.
+        const addCellDefault = document.getElementById("x" + xCoordinate + "y" + yCoordinate);
+        const addCellLeft = document.getElementById("x" + cellLeft + "y" + yCoordinate);
+        const addCellRight = document.getElementById("x" + cellRight + "y" + yCoordinate);
+        const addCellTop = document.getElementById("x" + xCoordinate + "y" + cellTop);
+        const addCellBottom = document.getElementById("x" + xCoordinate + "y" + cellBottom);
+
+        // 유효성 검사를 수행하여 null이나 존재하지 않는 경우 대신 -1을 추가합니다.
+        if (addCellDefault) {
+          adjacentCells.push(addCellDefault);
+        } else {
+          adjacentCells.push(-damage);
         }
-        // 테이블에 행을 추가합니다.
-        tableElement.appendChild(row);
+
+        if (addCellLeft) {
+          adjacentCells.push(addCellLeft);
+        } else {
+          adjacentCells.push(-damage);
+        }
+
+        if (addCellRight) {
+          adjacentCells.push(addCellRight);
+        } else {
+          adjacentCells.push(-damage);
+        }
+
+        if (addCellTop) {
+          adjacentCells.push(addCellTop);
+        } else {
+          adjacentCells.push(-damage);
+        }
+
+        if (addCellBottom) {
+          adjacentCells.push(addCellBottom);
+        } else {
+          adjacentCells.push(-damage);
+        }
+
+        console.log('셀 그룹:', adjacentCells);
+
+        // 인접한 셀들의 id 값을 가진 태그에 1씩 빼기합니다.
+        for (const adjacentCell of adjacentCells) {
+          if (adjacentCell === -1) {
+            continue; // -1인 경우 무시합니다.
+          }
+          const adjacentElement = document.getElementById(adjacentCell.id);
+          if (adjacentElement) {
+            // 해당 태그가 존재하는 경우 텍스트 콘텐츠를 1씩 뺍니다.
+            const currentValue = parseInt(adjacentElement.textContent);
+            const newValue = currentValue - damage;
+            // 값이 0 미만이 되지 않도록 처리합니다.
+            adjacentElement.textContent = Math.max(0, newValue).toString();
+          }
+        }
+
+      });
+
+      // 행에 셀을 추가합니다.
+      row.appendChild(cell);
     }
-};
-
-// "attack" 태그를 클릭했을 때 "attack" 모드를 전환하는 이벤트 리스너를 추가합니다.
-attackElement.addEventListener("click", toggleAttackMode);
-
-// 테이블 생성 함수를 호출하여 테이블을 만듭니다.
-createTable();
-
-// id가 "field"인 요소에 테이블을 추가합니다.
-fieldElement.appendChild(tableElement);
+    // 테이블에 행을 추가합니다.
+    tableElement.appendChild(row);
+  }
+}
+createTable(); // 테이블 생성 함수를 호출하여 테이블을 만듭니다.
+fieldElement.appendChild(tableElement); // id가 "field"인 요소에 테이블을 추가합니다.
