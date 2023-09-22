@@ -25,17 +25,24 @@ td{
   font-size: 23px;
   font-weight: 600;
 }
-
-#attack{
+.btn{
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
   height: 50px;
+  margin: 5px;
   border: 1px solid black;
   border-radius: 5px;
-  background-color: rgb(255, 138, 127);
   font-size: 23px;
   font-weight: 600;
-
+}
+#reset{
+  background-color: rgb(127, 187, 255);
+}
+#attack{
+  background-color: rgb(255, 202, 127);
+}
+#flame{
+  background-color: rgb(255, 104, 90);
 }

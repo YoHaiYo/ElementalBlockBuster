@@ -62,7 +62,7 @@ function updateCellEventListeners() {
             cell.addEventListener("click", cellClickHandler);
         }
     }
-}
+};
 
 // 4x4 크기의 테이블을 만드는 함수
 function createTable() {
