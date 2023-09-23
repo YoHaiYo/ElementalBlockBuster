@@ -53,7 +53,16 @@ function unitTileInsector(totalNum) {  const newList = [];
   document.getElementById('script--unit-tile').innerHTML = templet;
 }
 unitTileInsector(100);
+/*
+getRandomTile().number 호출한것과 tileNumber로 호출한것의 결과 차이.
+tileNumber: 이 변수는 getRandomTile() 함수를 한 번 호출한 결과의 number 속성을 저장합니다
 
+getRandomTile().number: 이 표현식은 매번 getRandomTile() 함수를 호출하여 
+랜덤한 타일을 선택하고, 해당 타일의 number 속성 값을 반환합니다. 
+이것은 매 호출마다 새로운 랜덤한 숫자를 가져옵니다.
+
+그러므로 tileNumber호출하면 모든 타일에 같은 숫자가 호출되었던것. 
+*/
 
 
 
