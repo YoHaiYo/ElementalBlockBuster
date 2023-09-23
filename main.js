@@ -9,14 +9,13 @@ let damageRange = 1;
 // --------------------------------------------------------------------------------------
 
 /// 함수정의 단락
+
 // 필드 초기화 함수
 function initializeField() {
   // id가 "field"인 요소를 찾습니다.
   const fieldElement = document.getElementById("field");
-
   // 테이블 엘리먼트를 생성합니다.
   const tableElement = document.createElement("table");
-
   // 필드 테이블 생성
   function createFieldTable() {
     for (let i = 1; i <= fieldSize; i++) {
@@ -73,11 +72,27 @@ function applyDamage(cell) {
       const currentValue = parseInt(adjacentElement.textContent);
       const newValue = currentValue - damage;
       adjacentElement.textContent = Math.max(0, newValue).toString();
+      
+      // adjacentElement의 배경색 설정
+      const value = parseInt(adjacentElement.textContent);
+      adjacentElement.classList.remove("red-background", "yellow-background");
+      
+      if (value === 1) {
+        adjacentElement.classList.add("red-background");
+      } else if (value >= 2 && value <= 5) {
+        adjacentElement.classList.add("yellow-background");
+      }
     }
   }
-};
+}
+
+
+
+
+
 
 // --------------------------------------------------------------------------------------
+
 /// 함수 호출 단락
 
 // 필드 초기화 함수 호출

@@ -14,3 +14,10 @@ td{
   font-size: 23px;
   font-weight: 600;
 }
+
+.red-background{
+  background-color: red;
+}
+.yellow-background{
+  background-color: yellow;
+}
