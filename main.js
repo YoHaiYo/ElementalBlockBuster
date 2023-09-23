@@ -29,12 +29,17 @@ function initializeField() {
 
   // 각 셀 생성 및 초기화 함수
   function createCell(row, x, y) {
-    let cell = document.createElement("td");
-    cell.id = "x" + x + "y" + y;
-    cell.textContent = initialCellValue.toString();
-    cell.addEventListener("click", handleCellClick);
-    row.appendChild(cell);
-  }
+  let cell = document.createElement("td");
+  cell.id = "x" + x + "y" + y;
+
+  // 초기 값에 해당하는 클래스 추가
+  cell.textContent = initialCellValue.toString();
+  cell.classList.add("hp-" + initialCellValue);
+
+  cell.addEventListener("click", handleCellClick);
+  row.appendChild(cell);
+}
+
 
   // 셀 클릭 이벤트 핸들러 함수
   function handleCellClick(event) {
@@ -75,19 +80,24 @@ function applyDamage(cell) {
       
       // adjacentElement의 배경색 설정
       const value = parseInt(adjacentElement.textContent);
-      adjacentElement.classList.remove("red-background", "yellow-background");
-      
-      if (value === 1) {
-        adjacentElement.classList.add("red-background");
-      } else if (value >= 2 && value <= 5) {
-        adjacentElement.classList.add("yellow-background");
-      }
+      adjacentElement.classList.remove("hp-0", "hp-1", "hp-2", "hp-3", "hp-4", "hp-5");
+
+      if (value === 0) {
+        adjacentElement.classList.add("hp-0");
+      } else if (value === 1) {
+        adjacentElement.classList.add("hp-1");
+      } else if (value === 2) {
+        adjacentElement.classList.add("hp-2");
+      } else if (value === 3) {
+        adjacentElement.classList.add("hp-3");
+      } else if (value === 4) {
+        adjacentElement.classList.add("hp-4");
+      } else if (value === 5) {
+        adjacentElement.classList.add("hp-5");
+      } 
     }
   }
 }
-
-
-
 
 
 
